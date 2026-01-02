@@ -383,13 +383,15 @@
             if (btn.innerText === "Editar") {
                 celulas.forEach(td => {
                     const campo = td.getAttribute('data-field');
+
+                    // Allow editing only for specific fields
+                    if (!['responsavel', 'local', 'status'].includes(campo)) return;
+
                     const valor = td.innerText.trim();
-                    if (['marca', 'local', 'status', 'tipo'].includes(campo)) {
+                    if (['local', 'status'].includes(campo)) {
                         const options = {
-                            marca: ['HP', 'Positivo Novo', 'Dell Novo', 'Dell', 'Positivo'],
                             local: ['Home Office', 'Depósito', 'Regional BH'],
-                            status: ['Em uso', 'Reserva', 'Fora de Uso'],
-                            tipo: ['Notebook', 'Desktop', 'Monitor']
+                            status: ['Em uso', 'Reserva', 'Fora de Uso']
                         };
                         let html = `<select>`;
                         options[campo].forEach(opt => html += `<option ${valor === opt ? 'selected' : ''}>${opt}</option>`);
@@ -436,11 +438,18 @@
             const cont = document.getElementById('obsContent');
             document.getElementById('obsTitle').innerText = "Observações: " + ativo.patrimonio;
 
-            // Create textarea for editing
-            cont.innerHTML = `<textarea id="obsText" style="width:100%; height:150px; padding:10px; border:1px solid #ccc; border-radius:4px; font-family:inherit;">${ativo.observacoes || ''}</textarea>
+            // Create textarea for editing with auto-expand logic
+            cont.innerHTML = `<textarea id="obsText" 
+                              oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'"
+                              style="width:100%; min-height:150px; resize:none; overflow-y:hidden; padding:10px; border:1px solid #ccc; border-radius:4px; font-family:inherit; box-sizing:border-box;">${ativo.observacoes || ''}</textarea>
                               <button onclick="salvarObservacao(${index})" style="width:100%; margin-top:10px; padding:10px; background-color:#27ae60; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Salvar Alterações</button>`;
 
             document.getElementById('modalObs').style.display = 'block';
+
+            // Adjust initial height
+            const ta = document.getElementById('obsText');
+            ta.style.height = 'auto';
+            ta.style.height = ta.scrollHeight + 'px';
         }
 
         function salvarObservacao(index) {

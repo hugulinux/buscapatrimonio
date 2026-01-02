@@ -7,137 +7,7 @@
     <title>Busca Patrimônio</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
-    <style>
-        /* Estilização Geral e Centralização */
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        /* Seção de Busca Centralizada */
-        .header-search {
-            text-align: center;
-            margin-bottom: 30px;
-            width: 100%;
-            max-width: 550px;
-        }
-
-        .header-search label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-            color: #2c3e50;
-        }
-
-        .header-search input {
-            padding: 12px 20px;
-            width: 100%;
-            border-radius: 25px;
-            border: 1px solid #ccc;
-            outline: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            box-sizing: border-box;
-        }
-
-        /* Formulário */
-        form {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 550px;
-            box-sizing: border-box;
-        }
-
-        .row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .field {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input,
-        select {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        /* Cores dos Status */
-        .status-em-uso {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .status-reserva {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .status-fora {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .btn-save {
-            background-color: #2c3e50;
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            font-size: 15px;
-            margin-top: 10px;
-            transition: background 0.3s;
-        }
-
-        .btn-save:hover {
-            background-color: #1a252f;
-        }
-
-        /* Botão Dispositivos Abaixo */
-        .btn-nav {
-            margin-top: 20px;
-            background-color: transparent;
-            color: #2c3e50;
-            padding: 12px 0;
-            border: 2px solid #2c3e50;
-            border-radius: 8px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            width: 100%;
-            max-width: 550px;
-            transition: all 0.3s;
-        }
-
-        .btn-nav:hover {
-            background-color: #2c3e50;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -149,34 +19,19 @@
     </div>
 
     <form id="patrimonioForm">
+        <!-- Linha 1: Patrimônio e Tipo -->
         <div class="row">
             <div class="field"><label>Patrimônio</label><input type="text" id="patrimonio" required></div>
-            <div class="field"><label>Hostname</label><input type="text" id="hostname" required></div>
-        </div>
-        <div class="row">
             <div class="field">
-                <label>Marca</label>
-                <select id="marca">
-                    <option>HP</option>
-                    <option>Positivo Novo</option>
-                    <option>Dell Novo</option>
-                    <option>Dell</option>
-                    <option>Positivo</option>
+                <label>Tipo</label>
+                <select id="tipo">
+                    <option>Notebook</option>
+                    <option>Desktop</option>
+                    <option>Monitor</option>
                 </select>
             </div>
-            <div class="field"><label>Responsável</label><input type="text" id="responsavel" required></div>
         </div>
-        <div class="row">
-            <div class="field">
-                <label>Local</label>
-                <select id="local">
-                    <option>Home Office</option>
-                    <option>Depósito</option>
-                    <option>Regional BH</option>
-                </select>
-            </div>
-            <div class="field"><label>Observações</label><input type="text" id="observacoes"></div>
-        </div>
+        <!-- Linha 2: Status e Responsável -->
         <div class="row">
             <div class="field">
                 <label>Status</label>
@@ -186,14 +41,34 @@
                     <option value="Fora de Uso" class="status-fora">Fora de Uso</option>
                 </select>
             </div>
+            <div class="field"><label>Responsável</label><input type="text" id="responsavel" required></div>
+        </div>
+        <!-- Linha 3: Hostname e Local -->
+        <div class="row">
+            <div class="field"><label>Hostname</label><input type="text" id="hostname"></div>
             <div class="field">
-                <label>Tipo</label>
-                <select id="tipo">
-                    <option>Notebook</option>
-                    <option>Desktop</option>
-                    <option>Monitor</option>
+                <label>Local</label>
+                <select id="local">
+                    <option>Home Office</option>
+                    <option>Depósito</option>
+                    <option>Regional BH</option>
                 </select>
             </div>
+        </div>
+        <!-- Linha 4: Marca e Observações -->
+        <div class="row">
+            <div class="field">
+                <label>Marca</label>
+                <select id="marca">
+                    <option>HP</option>
+                    <option>Positivo Novo</option>
+                    <option>Dell Novo</option>
+                    <option>Dell</option>
+                    <option>Positivo</option>
+                    <option>LG 24p</option>
+                </select>
+            </div>
+            <div class="field"><label>Observações</label><input type="text" id="observacoes"></div>
         </div>
         <button type="submit" class="btn-save">CADASTRAR ATIVO</button>
     </form>
@@ -216,9 +91,43 @@
             let lista = JSON.parse(localStorage.getItem('ativos') || '[]');
             lista.push(novoAtivo);
             localStorage.setItem('ativos', JSON.stringify(lista));
-            alert('Ativo salvo com sucesso!');
+            alert('Ativo cadastrado com sucesso!');
             e.target.reset();
         });
+
+        // Lógica para autocompletar hostname
+        const patrimonioInput = document.getElementById('patrimonio');
+        const tipoSelect = document.getElementById('tipo');
+        const hostnameInput = document.getElementById('hostname');
+
+        function atualizarHostname() {
+            const tipo = tipoSelect.value;
+            const patrimonio = patrimonioInput.value;
+
+            if (tipo === 'Notebook' || tipo === 'Desktop') {
+                hostnameInput.required = true;
+                if (patrimonio) {
+                    hostnameInput.value = `SERPRO-${patrimonio}`;
+                } else {
+                    hostnameInput.value = '';
+                }
+            } else if (tipo === 'Monitor') {
+                hostnameInput.required = false;
+                hostnameInput.value = '';
+            } else {
+                hostnameInput.required = false;
+                if (hostnameInput.value.startsWith('SERPRO-')) {
+                    hostnameInput.value = '';
+                }
+            }
+        }
+
+        patrimonioInput.addEventListener('input', atualizarHostname);
+        patrimonioInput.addEventListener('keyup', atualizarHostname);
+        tipoSelect.addEventListener('change', atualizarHostname);
+
+        // Chamar ao carregar a página
+        atualizarHostname();
 
         function irParaLista() {
             const termo = document.getElementById('inputBusca').value;
